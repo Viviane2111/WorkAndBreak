@@ -7,6 +7,7 @@ import {
   tick,
   switchMode,
   togglePause,
+  initialState,
 } from "../reducer/timerSlice";
 
 const Timer = () => {
@@ -48,6 +49,19 @@ const Timer = () => {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
+  // Calcul du pourcentage de progression
+  const calculateProgress = () => {
+    let totalTime;
+    if (mode === "work") {
+      totalTime = initialState.workTime;
+    } else if (mode === "break") {
+      totalTime = initialState.breakTime;
+    } else {
+      totalTime = initialState.longBreakTime;
+    }
+    return ((totalTime - currentTime) / totalTime) * 100;
+  };
+
   // basculer de start à pause
   const handleStartPause = () => {
     if (!isRunning) {
@@ -65,8 +79,16 @@ const Timer = () => {
   };
 
   return (
-    <div className="timer w-[620px] mx-auto flex flex-col items-center gap-5 border bg-amber-600">
+    <div className="timer w-[620px] h-full mx-auto flex flex-col items-center gap-5 border bg-amber-600">
       <h1 className="text-xl mt-3">{mode.toUpperCase()} TIMER</h1>
+
+      {/* Barre de la barre de progression */}
+      <div className="progress-bar-container">
+        <div
+          className="progress-bar"
+          style={{ width: `${calculateProgress()}%` }}
+        ></div>
+      </div>
 
       <div className="bg-orange-700 mb-8 flex flex-col items-center">
         <div className="timeTypeButton flex justify-center gap-3 mx-5 mt-3">

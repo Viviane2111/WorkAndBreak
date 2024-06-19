@@ -8,7 +8,7 @@ const longbreak = 1;
 const currenttime = 1;
 const longbreakInterval = 2;
 
-const initialState = {
+export const initialState = {
   workTime: work * 60,
   breakTime: shotbreak * 60,
   longBreakTime: longbreak * 60,
