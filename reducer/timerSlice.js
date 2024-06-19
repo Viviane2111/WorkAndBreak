@@ -1,10 +1,12 @@
 // reducer/timerSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
-const work = 5;
+// 50-5-50-15
+const work = 1;
 const shotbreak = 1;
 const longbreak = 1;
-const currenttime = 5;
+const currenttime = 1;
+const longbreakInterval = 2;
 
 const initialState = {
   workTime: work * 60,
@@ -15,49 +17,65 @@ const initialState = {
   mode: "work", // ou "break" ou "longBreak"
   isPaused: false, // nouveau champ pour gérer la pause
   cycleCount: 0, // nombre de cycles de travail effectués
+  cyclesUntilLongBreak: longbreakInterval,
 };
 
 const timerSlice = createSlice({
   name: "timer",
   initialState,
   reducers: {
+    // démarrage du compteur
     startTimer: (state) => {
       state.isRunning = true;
-      state.isPaused = false;
     },
+    //arrêt du compteur
     stopTimer: (state) => {
       state.isRunning = false;
-      state.isPaused = false;
     },
+    // réinitialisation
     resetTimer: (state) => {
       state.isRunning = false;
       state.isPaused = false;
-      state.currentTime = initialState[state.mode + "Time"];
+      state.currentTime = state.workTime;
+      state.mode = "work";
+      state.cycleCount = 0;
     },
-    // A chaque tick
+    // à chaque seconde
     tick: (state) => {
-      if (state.isRunning && state.currentTime > 0) {
+      if (state.isRunning && !state.isPaused) {
         state.currentTime -= 1;
-      } else if (state.isRunning && state.currentTime === 0) {
-         // Transition automatique entre les modes
-         state.isRunning = false;
-         if (state.mode === "work") {
-            state.cycleCount +=1;
-            state.mode = state.cycleCount % 4 === 0 ? "longBreak" : "break";
-         } else {
+        if (state.currentTime === 0) {
+          if (state.mode === "work") {
+            state.cycleCount += 1;
+            if (state.cycleCount % state.cyclesUntilLongBreak === 0) {
+              state.mode = "longBreak";
+              state.currentTime = state.longBreakTime;
+            } else {
+              state.mode = "break";
+              state.currentTime = state.breakTime;
+            }
+          } else {
             state.mode = "work";
-         }
-         state.currentTime = initialState[state.mode + "Time"];
+            state.currentTime = state.workTime;
+          }
+        }
       }
     },
+    // changement de mode
     switchMode: (state, action) => {
       state.mode = action.payload;
-      state.currentTime = initialState[state.mode + "Time"];
+      if (action.payload === "work") {
+        state.currentTime = state.workTime;
+      } else if (action.payload === "break") {
+        state.currentTime = state.breakTime;
+      } else if (action.payload === "longBreak") {
+        state.currentTime = state.longBreakTime;
+      }
     },
+    // bascule pour l'arrêt temporaire
     togglePause: (state) => {
       state.isPaused = !state.isPaused;
-      state.isRunning = !state.isPaused; // bascule entre pause et reprise
-    }
+    },
   },
 });
 

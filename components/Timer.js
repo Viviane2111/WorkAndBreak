@@ -11,7 +11,9 @@ import {
 
 const Timer = () => {
   const dispatch = useDispatch();
-  const { currentTime, isRunning, mode, isPaused, cycleCount } = useSelector((state) => state.timer);
+  const { currentTime, isRunning, mode, isPaused, cycleCount } = useSelector(
+    (state) => state.timer
+  );
 
   // compte ou décompte du temps qui passe
   useEffect(() => {
@@ -21,18 +23,23 @@ const Timer = () => {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [isRunning, isPaused,dispatch]);
+  }, [isRunning, isPaused, dispatch]);
+
+  // mise à jour de l'affichage de l'onglet navigateur
+  useEffect(() => {
+    document.title = formatTime(currentTime) + " - " + mode.toUpperCase();
+  }, [currentTime]);
 
   // jouer un son au changement de mode
   useEffect(() => {
-    if (currentTime === 0) {
-      playSound();
-    }
-  }, [currentTime]);
+    playSound();
+  }, [mode]);
+
   const playSound = () => {
-    const audio = new Audio('/sound/changes.mp3');
+    const changeModeSound = "/sound/changes.mp"; //! ajouter 3
+    const audio = new Audio(changeModeSound);
     audio.play();
-  }
+  };
 
   // formatage du l'affichage du temps
   const formatTime = (time) => {
@@ -48,28 +55,35 @@ const Timer = () => {
     } else {
       dispatch(togglePause());
     }
-  }
+  };
+
+  // ajout du css sur les boutons concernés, en fonction du mode
+  const getButtonClass = (buttonMode) => {
+    return `cursor-pointer w-28 py-1 px-1 rounded-md ${
+      mode === buttonMode ? "bg-orange-900 text-white" : "bg-orange-500"
+    }`;
+  };
 
   return (
     <div className="timer w-[620px] mx-auto flex flex-col items-center gap-5 border bg-amber-600">
-      <h1 className="text-xl">{mode.toUpperCase()} TIMER</h1>
+      <h1 className="text-xl mt-3">{mode.toUpperCase()} TIMER</h1>
 
       <div className="bg-orange-700 mb-8 flex flex-col items-center">
-        <div className="timeTypeButton flex justify-center">
+        <div className="timeTypeButton flex justify-center gap-3 mx-5 mt-3">
           <button
-            className="cursor-pointer w-32 py-2 px-2"
+            className={getButtonClass("work")}
             onClick={() => dispatch(switchMode("work"))}
           >
             Work
           </button>
           <button
-            className="cursor-pointer w-32 py-2 px-2"
+            className={getButtonClass("break")}
             onClick={() => dispatch(switchMode("break"))}
           >
             Break
           </button>
           <button
-            className="cursor-pointer w-32 py-2 px-2"
+            className={getButtonClass("longBreak")}
             onClick={() => dispatch(switchMode("longBreak"))}
           >
             Long break
@@ -82,9 +96,9 @@ const Timer = () => {
 
         <div className="controls flex flex-col gap-2">
           <div className="flex flex-col justify-center gap-2">
-            <div className="flex bg-slate-100 m-auto gap-2">
+            <div className="flex bg-slate-100 m-auto gap-2 rounded-xl">
               <button
-                className="w-[200px] py-4 px-8 border rounded-xl shadow-xl"
+                className="w-[200px] py-4 px-8 shadow-xl"
                 onClick={handleStartPause}
               >
                 {isRunning && !isPaused ? "Pause" : "Start"}
@@ -99,10 +113,8 @@ const Timer = () => {
                 ♻
               </button>
             </div>
-
           </div>
         </div>
-
       </div>
       <div className="cycles text-lg font-medium text-white my-4">
         Cycles : {cycleCount}
