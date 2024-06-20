@@ -1,10 +1,12 @@
 // components/Home.js
 import Timer from "./Timer";
+import Navbar from "./Navbar";
 
 const Home = () => {
 
   return (
-    <div className="bg-slate-900 h-[100vh]">
+    <div className="h-[100vh]">
+      <Navbar />
       <Timer />
     </div>
   );

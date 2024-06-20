@@ -78,8 +78,18 @@ const Timer = () => {
     }`;
   };
 
+  // Déterminer la classe du fond d'écran en fonction du mode
+  const getBackgroundClass = () => {
+    if (mode === "work") return "bg-work";
+    if (mode === "break") return "bg-break";
+    if (mode === "longBreak") return "bg-longBreak";
+    return "";
+  };
+  
   return (
-    <div className="timer w-[620px] h-full mx-auto flex flex-col items-center gap-5 border bg-amber-600">
+    <div
+      className={`timer w-[620px] mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass()}`}
+    >
       <h1 className="text-xl mt-3">{mode.toUpperCase()} TIMER</h1>
 
       {/* Barre de la barre de progression */}

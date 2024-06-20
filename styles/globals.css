@@ -11,7 +11,19 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #113535;
+  /* background-color: #113535; */
+  color: antiquewhite;
+}
+.bg-work {
+  background-color: #FFA500; /* Orange pour le travail */
+}
+
+.bg-break {
+  background-color: #32CD32; /* Vert pour la courte pause */
+}
+
+.bg-longBreak {
+  background-color: #1E90FF; /* Bleu pour la longue pause */
 }
 
 /* Barre de progression pour le temps qui s'écoule */
