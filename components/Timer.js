@@ -9,6 +9,14 @@ import {
   togglePause,
   initialState,
 } from "../reducer/timerSlice";
+import {
+  playSound,
+  formatTime,
+  calculateProgress,
+  getButtonClass,
+  getBackgroundClass,
+  getSectionClass,
+} from "../utils/timerUtils";
 
 const Timer = () => {
   const dispatch = useDispatch();
@@ -36,18 +44,6 @@ const Timer = () => {
     playSound();
   }, [mode]);
 
-  const playSound = () => {
-    const changeModeSound = "/sound/changes.mp"; //! ajouter 3
-    const audio = new Audio(changeModeSound);
-    audio.play();
-  };
-
-  // formatage du l'affichage du temps
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  };
 
   // Calcul du pourcentage de progression
   const calculateProgress = () => {
@@ -71,24 +67,9 @@ const Timer = () => {
     }
   };
 
-  // ajout du css sur les boutons concernés, en fonction du mode
-  const getButtonClass = (buttonMode) => {
-    return `cursor-pointer w-28 py-1 px-1 rounded-md ${
-      mode === buttonMode ? "bg-orange-900 text-white" : "bg-orange-500"
-    }`;
-  };
-
-  // Déterminer la classe du fond d'écran en fonction du mode
-  const getBackgroundClass = () => {
-    if (mode === "work") return "bg-work";
-    if (mode === "break") return "bg-break";
-    if (mode === "longBreak") return "bg-longBreak";
-    return "";
-  };
-  
   return (
     <div
-      className={`timer w-[620px] mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass()}`}
+      className={`timer w-[620px] mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass(mode)}`}
     >
       <h1 className="text-xl mt-3">{mode.toUpperCase()} TIMER</h1>
 
@@ -96,26 +77,26 @@ const Timer = () => {
       <div className="progress-bar-container">
         <div
           className="progress-bar"
-          style={{ width: `${calculateProgress()}%` }}
+          style={{ width: `${calculateProgress(mode)}%` }}
         ></div>
       </div>
 
-      <div className="bg-orange-700 mb-8 flex flex-col items-center">
+      <div className={`${getSectionClass(mode)} mb-8 flex flex-col items-center`}>
         <div className="timeTypeButton flex justify-center gap-3 mx-5 mt-3">
           <button
-            className={getButtonClass("work")}
+            className={getButtonClass(mode,"work")}
             onClick={() => dispatch(switchMode("work"))}
           >
             Work
           </button>
           <button
-            className={getButtonClass("break")}
+            className={getButtonClass(mode,"break")}
             onClick={() => dispatch(switchMode("break"))}
           >
             Break
           </button>
           <button
-            className={getButtonClass("longBreak")}
+            className={getButtonClass(mode,"longBreak")}
             onClick={() => dispatch(switchMode("longBreak"))}
           >
             Long break
@@ -130,7 +111,7 @@ const Timer = () => {
           <div className="flex flex-col justify-center gap-2">
             <div className="flex bg-slate-100 m-auto gap-2 rounded-xl">
               <button
-                className="w-[200px] py-4 px-8 shadow-xl"
+                className="w-[200px] py-4 px-8 shadow-2xl text-black text-2xl z-10"
                 onClick={handleStartPause}
               >
                 {isRunning && !isPaused ? "Pause" : "Start"}

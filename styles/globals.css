@@ -1,3 +1,4 @@
+/* styles/global.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,17 +15,44 @@ body {
   /* background-color: #113535; */
   color: antiquewhite;
 }
+
+/** Couleurs en fonction du mode */
+/* fond du container */
 .bg-work {
   background-color: #FFA500; /* Orange pour le travail */
 }
-
 .bg-break {
   background-color: #32CD32; /* Vert pour la courte pause */
 }
-
 .bg-longBreak {
   background-color: #1E90FF; /* Bleu pour la longue pause */
 }
+
+/* fond de la boite  */
+.box-work {
+  background-color: #8a5a00; /* Orange pour le travail */
+}
+.box-break {
+  background-color: #1f7a00; /* Vert pour la courte pause */
+}
+.box-longBreak {
+  background-color: #004181; /* Bleu pour la longue pause */
+}
+
+/* fond des boutons */
+.button-work {
+  background-color: #FFA500; /* Orange pour le travail */
+  color: white;
+}
+.button-break {
+  background-color: #32CD32; /* Vert pour la courte pause */
+  color: white;
+}
+.button-longBreak {
+  background-color: #1E90FF; /* Bleu pour la longue pause */
+  color: white;
+}
+
 
 /* Barre de progression pour le temps qui s'écoule */
 .progress-bar-container {
