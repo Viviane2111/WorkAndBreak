@@ -1,11 +1,52 @@
 // components/Settings.js
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./Navbar";
-const settings = () => {
-  const [work, setWork] = useState(0);
-  const [shortbreak, setShortbreak] = useState(0);
-  const [longbreak, setLongbreak] = useState(0);
-  const [delay, setDelay] = useState(0);
+import {
+  updateWorkTime,
+  updateBreakTime,
+  updateLongBreakTime,
+  updateCyclesUntilLongBreak,
+  toggleAutoStartPomodoro,
+  toggleAutoStartBreaks,
+} from "../reducer/timerSlice";
+
+const Settings = () => {
+  const dispatch = useDispatch();
+  const {
+    workTime,
+    breakTime,
+    longBreakTime,
+    cyclesUntilLongBreak,
+    autoStartPomodoro,
+    autoStartBreaks,
+  } = useSelector((state) => state.timer);
+
+  const [work, setWork] = useState(workTime / 60);
+  const [shortbreak, setShortbreak] = useState(breakTime / 60);
+  const [longbreak, setLongbreak] = useState(longBreakTime / 60);
+  const [delay, setDelay] = useState(cyclesUntilLongBreak);
+
+  const handleUpdateWorkTime = (e) => {
+    setWork(e.target.value);
+    dispatch(updateWorkTime(e.target.value));
+  };
+
+  const handleUpdateBreakTime = (e) => {
+    setShortbreak(e.target.value);
+    dispatch(updateBreakTime(e.target.value));
+  };
+
+  const handleUpdateLongBreakTime = (e) => {
+    setLongbreak(e.target.value);
+    dispatch(updateLongBreakTime(e.target.value));
+  };
+
+  const handleUpdateCyclesUntilLongBreak = (e) => {
+    setDelay(e.target.value);
+    dispatch(updateCyclesUntilLongBreak(e.target.value));
+  };
+
   return (
     <div className="bg-[#293546] h-[100vh]">
       <Navbar />
@@ -17,13 +58,13 @@ const settings = () => {
           {/* travail */}
           <div className="flex mx-2">
             <label className="w-[375px] text-xl">
-              Durée de u temps travaillé :
+              Durée de temps travaillé :
             </label>
             <div className="flex flex-col">
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
-                onChange={(e) => setWork(e.target.value)}
+                onChange={handleUpdateWorkTime}
                 value={work}
               />
               <span className="text-sm text-[#a1a1a1]">en minutes</span>
@@ -38,7 +79,7 @@ const settings = () => {
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
-                onChange={(e) => setShortbreak(e.target.value)}
+                onChange={handleUpdateBreakTime}
                 value={shortbreak}
               />
               <span className="text-sm text-[#a1a1a1]">en minutes</span>
@@ -53,7 +94,7 @@ const settings = () => {
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
-                onChange={(e) => setLongbreak(e.target.value)}
+                onChange={handleUpdateLongBreakTime}
                 value={longbreak}
               />
               <span className="text-sm text-[#a1a1a1]">en minutes</span>
@@ -68,7 +109,7 @@ const settings = () => {
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
-                onChange={(e) => setDelay(e.target.value)}
+                onChange={handleUpdateCyclesUntilLongBreak}
                 value={delay}
               />
               <span className="text-sm text-[#a1a1a1]">en pomodoros</span>
@@ -77,28 +118,28 @@ const settings = () => {
           {/* lancement automatique du temps travaillé */}
           <div className="flex mx-2">
             <label className="w-[375px] text-xl">
-              lancement automatique du pomodoro :
+              Lancement automatique du pomodoro :
             </label>
             <div className="flex flex-col items-center justify-center">
               <input
                 className="w-[100px] bg-transparent border"
                 type="checkbox"
-                onChange={(e) => setDelay(e.target.value)}
-                value={delay}
+                onChange={() => dispatch(toggleAutoStartPomodoro())}
+                checked={autoStartPomodoro}
               />
             </div>
           </div>
           {/* lancement automatique des pauses */}
           <div className="flex mx-2">
             <label className="w-[375px] text-xl">
-              lancement automatique des pauses :
+              Lancement automatique des pauses :
             </label>
             <div className="flex flex-col items-center justify-center">
               <input
                 className="w-[100px] bg-transparent border"
                 type="checkbox"
-                onChange={(e) => setDelay(e.target.value)}
-                value={delay}
+                onChange={() => dispatch(toggleAutoStartBreaks())}
+                checked={autoStartBreaks}
               />
             </div>
           </div>
@@ -107,4 +148,5 @@ const settings = () => {
     </div>
   );
 };
-export default settings;
+
+export default Settings;

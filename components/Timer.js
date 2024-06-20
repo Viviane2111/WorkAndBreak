@@ -1,5 +1,5 @@
 // components/Home.js
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   startTimer,
@@ -12,7 +12,6 @@ import {
 import {
   playSound,
   formatTime,
-  calculateProgress,
   getButtonClass,
   getBackgroundClass,
   getSectionClass,
@@ -20,9 +19,10 @@ import {
 
 const Timer = () => {
   const dispatch = useDispatch();
-  const { currentTime, isRunning, mode, isPaused, cycleCount } = useSelector(
+  const { currentTime, isRunning, mode, isPaused, cycleCount, workTime, breakTime, longBreakTime } = useSelector(
     (state) => state.timer
   );
+  const [previousMode, setPreviousMode] = useState(mode);
 
   // compte ou décompte du temps qui passe
   useEffect(() => {
@@ -49,14 +49,20 @@ const Timer = () => {
   const calculateProgress = () => {
     let totalTime;
     if (mode === "work") {
-      totalTime = initialState.workTime;
+      totalTime = workTime;
     } else if (mode === "break") {
-      totalTime = initialState.breakTime;
+      totalTime = breakTime;
     } else {
-      totalTime = initialState.longBreakTime;
+      totalTime = longBreakTime;
+    }
+    // Réinitialisation de la progression si le mode a changé
+    if (mode !== previousMode) {
+      setPreviousMode(mode);
+      return 0;
     }
     return ((totalTime - currentTime) / totalTime) * 100;
   };
+  const progress = calculateProgress();
 
   // basculer de start à pause
   const handleStartPause = () => {
@@ -69,37 +75,38 @@ const Timer = () => {
 
   return (
     <div
-      className={`timer w-[620px] mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass(mode)}`}
+      className={`timer w-[620px] mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass(
+        mode
+      )}`}
     >
       <h1 className="text-xl mt-3">{mode.toUpperCase()} TIMER</h1>
 
       {/* Barre de la barre de progression */}
       <div className="progress-bar-container">
-        <div
-          className="progress-bar"
-          style={{ width: `${calculateProgress(mode)}%` }}
-        ></div>
+        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
       </div>
 
-      <div className={`${getSectionClass(mode)} mb-8 flex flex-col items-center`}>
+      <div
+        className={`w-[80%] my-8 flex flex-col items-center ${getSectionClass(mode)}`}
+      >
         <div className="timeTypeButton flex justify-center gap-3 mx-5 mt-3">
           <button
-            className={getButtonClass(mode,"work")}
+            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(mode, "work")}`}
             onClick={() => dispatch(switchMode("work"))}
           >
-            Work
+            Action
           </button>
           <button
-            className={getButtonClass(mode,"break")}
+            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(mode, "break")}`}
             onClick={() => dispatch(switchMode("break"))}
           >
-            Break
+            Courte pause
           </button>
           <button
-            className={getButtonClass(mode,"longBreak")}
+            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(mode, "longBreak")}`}
             onClick={() => dispatch(switchMode("longBreak"))}
           >
-            Long break
+            Longue pause
           </button>
         </div>
 

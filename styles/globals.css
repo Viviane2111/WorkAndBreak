@@ -43,14 +43,17 @@ body {
 .button-work {
   background-color: #FFA500; /* Orange pour le travail */
   color: white;
+  border: none;
 }
 .button-break {
   background-color: #32CD32; /* Vert pour la courte pause */
   color: white;
+  border: none;
 }
 .button-longBreak {
   background-color: #1E90FF; /* Bleu pour la longue pause */
   color: white;
+  border: none;
 }
 
 
