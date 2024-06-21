@@ -1,5 +1,6 @@
 // reducer/timerSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+import { loadSettingsFromLocalStorage } from "../utils/storageUtils";
 
 // 50-5-50-15
 // valeurs par défaut => volontairemant déséquilibrées pour le dev
@@ -9,7 +10,7 @@ const longbreak = 1;
 const currenttime = 1;
 const longbreakInterval = 2;
 
-export const initialState = {
+const initialState = {
   workTime: work * 60, // durée de travail par défaut en secondes
   breakTime: shotbreak * 60, // durée de la petite pause par défaut en secondes
   longBreakTime: longbreak * 60, // durée de la longue pause par défaut en secondes
@@ -22,6 +23,16 @@ export const initialState = {
   autoStartPomodoro: false,
   autoStartBreaks: false,
 };
+
+const settingsFromLocalStorage = loadSettingsFromLocalStorage();
+if (settingsFromLocalStorage) {
+  initialState.workTime = settingsFromLocalStorage.workTime;
+  initialState.breakTime = settingsFromLocalStorage.breakTime;
+  initialState.longBreakTime = settingsFromLocalStorage.longBreakTime;
+  initialState.cyclesUntilLongBreak = settingsFromLocalStorage.cyclesUntilLongBreak;
+  initialState.autoStartPomodoro = settingsFromLocalStorage.autoStartPomodoro;
+  initialState.autoStartBreaks = settingsFromLocalStorage.autoStartBreaks;
+}
 
 const timerSlice = createSlice({
   name: "timer",
@@ -53,9 +64,11 @@ const timerSlice = createSlice({
             if (state.cycleCount % state.cyclesUntilLongBreak === 0) {
               state.mode = "longBreak";
               state.currentTime = state.longBreakTime;
+              if (!state.autoStartBreaks) state.isRunning = false;
             } else {
               state.mode = "break";
               state.currentTime = state.breakTime;
+              if (!state.autoStartPomodoro) state.isRunning = false;
             }
           } else {
             state.mode = "work";

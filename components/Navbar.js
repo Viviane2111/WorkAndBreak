@@ -8,7 +8,7 @@ const Navbar = () => {
     <div
       className="
       w-full h-16 flex justify-center items-center
-      border-b-[1px] border-slate-50 mb-3 bg-slate-800 text-slate-50 top-0"
+      border-b-[1px] border-slate-50 mb-3 bg-slate-800 text-slate-50 top-0 fixed"
     >
       <div className="w-full flex justify-around">
         <Link href="/">
@@ -17,20 +17,22 @@ const Navbar = () => {
             POMODORO
           </div>
         </Link>
-        <Link href="/settings">
-          <div className="flex items-center gap-1">
-            <Settings /> Paramètres
-          </div>
-        </Link>
         <Link href="">
           <div className="flex items-center gap-1">
             <BarChart3 /> Stats
           </div>
         </Link>
-        <div className="flex items-center gap-1">
-          <CircleUserRound />
-          Connexion
-        </div>
+        <Link href="/settings">
+          <div className="flex items-center gap-1">
+            <Settings /> Paramètres
+          </div>
+        </Link>
+        <Link href="/connexion">
+          <div className="flex items-center gap-1">
+            <CircleUserRound />
+            Connexion
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         <link
           rel="icon"
-          href="./apple1.png"
+          href="./tomat.png"
           
           type="image/png"
         />
