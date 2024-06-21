@@ -7,7 +7,6 @@ import {
   tick,
   switchMode,
   togglePause,
-  initialState,
 } from "../reducer/timerSlice";
 import {
   playSound,
@@ -16,6 +15,9 @@ import {
   getBackgroundClass,
   getSectionClass,
 } from "../utils/timerUtils";
+import {
+  loadSettingsAndDispatch,
+} from "../utils/storageUtils";
 
 const Timer = () => {
   const dispatch = useDispatch();
@@ -24,14 +26,22 @@ const Timer = () => {
   );
   const [previousMode, setPreviousMode] = useState(mode);
 
-  // compte ou décompte du temps qui passe
   useEffect(() => {
+    loadSettingsAndDispatch(dispatch);
+  }, [dispatch]);
+
+  useEffect(() => {
+    let timer = null;
     if (isRunning && !isPaused) {
-      const interval = setInterval(() => {
+      timer = setInterval(() => {
         dispatch(tick());
       }, 1000);
-      return () => clearInterval(interval);
     }
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
   }, [isRunning, isPaused, dispatch]);
 
   // mise à jour de l'affichage de l'onglet navigateur
@@ -43,7 +53,6 @@ const Timer = () => {
   useEffect(() => {
     playSound();
   }, [mode]);
-
 
   // Calcul du pourcentage de progression
   const calculateProgress = () => {
@@ -73,13 +82,29 @@ const Timer = () => {
     }
   };
 
+  // const handleReset = () => {
+  //   dispatch(resetTimer());
+  //   loadSettingsAndDispatch(dispatch);
+  // };
+  const handleReset = () => {
+    dispatch(resetTimer());
+    setTimeout(() => loadSettingsAndDispatch(dispatch), 0);
+  };
+
   return (
     <div
       className={`timer w-[620px] mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass(
         mode
       )}`}
     >
-      <h1 className="text-xl mt-3">{mode.toUpperCase()} TIMER</h1>
+      <h1 className="text-xl mt-16 pt-8">
+        {mode === "work"
+          ? "Il est temps de se concentrer !"
+          : mode === "break"
+          ? "Il est temps pour une pause !"
+          : "Il est temps de s'étirer et se détendre !"}
+      </h1>
+      <p>{Math.floor(currentTime / 60)} minutes</p>
 
       {/* Barre de la barre de progression */}
       <div className="progress-bar-container">
@@ -87,23 +112,34 @@ const Timer = () => {
       </div>
 
       <div
-        className={`w-[80%] my-8 flex flex-col items-center ${getSectionClass(mode)}`}
+        className={`w-[80%] my-8 flex flex-col items-center ${getSectionClass(
+          mode
+        )}`}
       >
         <div className="timeTypeButton flex justify-center gap-3 mx-5 mt-3">
           <button
-            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(mode, "work")}`}
+            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(
+              mode,
+              "work"
+            )}`}
             onClick={() => dispatch(switchMode("work"))}
           >
             Action
           </button>
           <button
-            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(mode, "break")}`}
+            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(
+              mode,
+              "break"
+            )}`}
             onClick={() => dispatch(switchMode("break"))}
           >
             Courte pause
           </button>
           <button
-            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(mode, "longBreak")}`}
+            className={`w-auto px-2 py-1 rounded-md border ${getButtonClass(
+              mode,
+              "longBreak"
+            )}`}
             onClick={() => dispatch(switchMode("longBreak"))}
           >
             Longue pause
@@ -128,7 +164,8 @@ const Timer = () => {
             <div className="m-auto">
               <button
                 className=" px-2 text-2xl text-white mb-2"
-                onClick={() => dispatch(resetTimer())}
+                // onClick={() => dispatch(resetTimer())}
+                onClick={handleReset}
               >
                 ♻
               </button>

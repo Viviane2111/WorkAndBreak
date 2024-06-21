@@ -19,7 +19,7 @@ const Navbar = () => {
         </Link>
         <Link href="">
           <div className="flex items-center gap-1">
-            <BarChart3 /> Stats
+            <BarChart3 /> Rapport
           </div>
         </Link>
         <Link href="/settings">

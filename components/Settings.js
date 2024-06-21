@@ -7,11 +7,17 @@ import {
   updateBreakTime,
   updateLongBreakTime,
   updateCyclesUntilLongBreak,
-  toggleAutoStartPomodoro,
-  toggleAutoStartBreaks,
+  // toggleAutoStartPomodoro,
+  // toggleAutoStartBreaks,
+  setAutoStartPomodoro,
+  setAutoStartBreaks,
 } from "../reducer/timerSlice";
 import ToggleCheckButton from "./ToggleCheckButton";
-import { saveSettingsToLocalStorage, loadSettingsFromLocalStorage } from "../utils/storageUtils";
+import {
+  saveSettingsToLocalStorage,
+  loadSettingsFromLocalStorage,
+  loadSettingsAndDispatch,
+} from "../utils/storageUtils";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -30,22 +36,10 @@ const Settings = () => {
   const [delay, setDelay] = useState(cyclesUntilLongBreak);
 
   useEffect(() => {
-    const settings = loadSettingsFromLocalStorage();
-    if (settings) {
-      // setWork(settings.workTime / 60);
-      // setShortbreak(settings.breakTime / 60);
-      // setLongbreak(settings.longBreakTime / 60);
-      // setDelay(settings.cyclesUntilLongBreak);
-      dispatch(updateWorkTime(settings.workTime));
-      dispatch(updateBreakTime(settings.breakTime));
-      dispatch(updateLongBreakTime(settings.longBreakTime));
-      dispatch(updateCyclesUntilLongBreak(settings.cyclesUntilLongBreak));
-      if (settings.autoStartPomodoro !== undefined) dispatch(toggleAutoStartPomodoro());
-      if (settings.autoStartBreaks !== undefined) dispatch(toggleAutoStartBreaks());
-    };
+    loadSettingsAndDispatch(dispatch);
   }, [dispatch]);
 
-
+// temps travaillé
   const handleUpdateWorkTime = (e) => {
     const value = e.target.value;
     setWork(value);
@@ -59,7 +53,7 @@ const Settings = () => {
       autoStartBreaks,
     });
   };
-
+// temps courte pause
   const handleUpdateBreakTime = (e) => {
     const value = e.target.value;
     setShortbreak(value);
@@ -73,7 +67,7 @@ const Settings = () => {
       autoStartBreaks,
     });
   };
-
+// temps longue pause
   const handleUpdateLongBreakTime = (e) => {
     const value = e.target.value;
     setLongbreak(value);
@@ -87,7 +81,7 @@ const Settings = () => {
       autoStartBreaks,
     });
   };
-
+// nombre de cycles
   const handleUpdateCyclesUntilLongBreak = (e) => {
     const value = e.target.value;
     setDelay(value);
@@ -101,9 +95,9 @@ const Settings = () => {
       autoStartBreaks,
     });
   };
-
+// start auto du temps travaillé
   const handleToggleAutoStartPomodoro = () => {
-    dispatch(toggleAutoStartPomodoro());
+    dispatch(setAutoStartPomodoro(!autoStartPomodoro));
     saveSettingsToLocalStorage({
       workTime: work * 60,
       breakTime: shortbreak * 60,
@@ -113,9 +107,9 @@ const Settings = () => {
       autoStartBreaks,
     });
   };
-
+// sart auto des pauses
   const handleToggleAutoStartBreaks = () => {
-    dispatch(toggleAutoStartBreaks());
+    dispatch(setAutoStartBreaks(!autoStartBreaks));
     saveSettingsToLocalStorage({
       workTime: work * 60,
       breakTime: shortbreak * 60,

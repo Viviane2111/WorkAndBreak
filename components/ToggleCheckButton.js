@@ -1,8 +1,9 @@
 // conponents/ToggleCheckButton.js
+
 const ToggleCheckButton = ({ id, label, isChecked, onChange }) => {
   return (
     <div className="flex items-center justify-center w-full mb-12">
-      <label class="flex items-center cursor-pointer">
+      <label className="flex items-center cursor-pointer">
         <div className="relative">
           <input
             id={id}

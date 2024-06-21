@@ -1,4 +1,4 @@
-// pages/settingsPage.js
+// pages/settings.js
 import Settings from "../components/Settings";
 function SettingsPage() {
   return (
