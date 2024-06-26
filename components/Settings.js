@@ -111,13 +111,13 @@ const Settings = () => {
         <div className="text-4xl text-center mb-20">
           <h1 className="pt-8">Settings</h1>
         </div>
-        <div className="w-[910px] h-[100vh] m-auto flex flex-col items-center gap-8">
+        <div className="max-w-full w-[90%] md:w-[910px] m-auto flex flex-col items-center gap-8">
           {/* travail */}
-          <div className="flex mx-2">
-            <label className="w-[375px] text-xl">
+          <div className="flex flex-col md:flex-row items-center mx-2 w-full">
+            <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
               Durée de temps travaillé :
             </label>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
@@ -128,11 +128,11 @@ const Settings = () => {
             </div>
           </div>
           {/* pause 1 */}
-          <div className="flex mx-2">
-            <label className="w-[375px] text-xl">
+          <div className="flex flex-col md:flex-row items-center mx-2 w-full">
+            <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
               Durée de la petite pause :
             </label>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
@@ -143,11 +143,11 @@ const Settings = () => {
             </div>
           </div>
           {/* pause 2 */}
-          <div className="flex mx-2">
-            <label className="w-[375px] text-xl">
+          <div className="flex flex-col md:flex-row items-center mx-2 w-full">
+            <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
               Durée de la longue pause :
             </label>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
@@ -158,11 +158,11 @@ const Settings = () => {
             </div>
           </div>
           {/* nombre de cycle */}
-          <div className="flex mx-2">
-            <label className="w-[375px] text-xl">
+          <div className="flex flex-col md:flex-row items-center mx-2 w-full">
+            <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
               Délai avant la longue pause :
             </label>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <input
                 className="w-[100px] bg-transparent border pl-2"
                 type="number"
@@ -174,11 +174,11 @@ const Settings = () => {
           </div>
           <div className="mt-5">
             {/* lancement automatique du temps travaillé */}
-            <div className="flex mx-2 mb-7">
-              <label className="w-[375px] text-xl">
+            <div className="flex flex-col md:flex-row items-center mx-2 mb-7 w-full">
+              <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
                 Lancement automatique du pomodoro :
               </label>
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center">
                 <ToggleCheckButton
                   id="togglePomodoro"
                   label=""
@@ -188,11 +188,11 @@ const Settings = () => {
               </div>
             </div>
             {/* lancement automatique des pauses */}
-            <div className="flex mx-2">
+            <div className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
               <label className="w-[375px] text-xl">
                 Lancement automatique des pauses :
               </label>
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center">
                 <ToggleCheckButton
                   id="toggleBreaks"
                   label=""

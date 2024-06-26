@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 const Home = () => {
 
   return (
-    <div className="h-[100vh] w-[100vw] bg-[#151515]">
+    <div className="min-h-screen w-full bg-[#151515]">
       <Navbar />
       <Timer />
     </div>

@@ -105,34 +105,38 @@ const Timer = () => {
 
   return (
     <div
-      className={`timer w-[620px] mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass(
+      className={`timer max-w-4xl w-full mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass(
         mode
       )}`}
     >
       <div>
-        <h1 className="text-xl mt-10 pt-8">
+        <h1 className="text-lg sm:text-xl mt-10 pt-8 text-center">
           {mode === "work"
             ? "Il est temps de se concentrer !"
             : mode === "break"
             ? "Il est temps pour une pause !"
             : "Il est temps de s'étirer et se détendre !"}
         </h1>
-        <p className="text-center mt-2">
+        <p className="text-center mt-2 text-lg">
           {Math.floor(currentTime / 60)} minutes
         </p>
       </div>
-      {/* Barre de la barre de progression */}
-      <div className="progress-bar-container">
-        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+      {/* Barre de la barre de progression //! à ajuster */}
+      <div className="w-full h-1 bg-gray-300 rounded">
+        <div
+          className="h-full bg-blue-500 rounded transition-all duration-1000 ease-linear"
+          style={{ width: `${progress}%` }}
+        ></div>
       </div>
+      {/* Container des boutons des timers */}
       <div
-        className={`w-[80%] my-8 flex flex-col items-center relative ${getSectionClass(
+        className={`h-full sm:w-[80%] my-8 flex flex-col items-center relative ${getSectionClass(
           mode
         )}`}
       >
         {/* l'icone pour ouvrir la modale */}
         <div className="w-full">
-          <div className=" absolute left-6 top-9">
+          <div className=" absolute left-1 top-1 sm:left-6 sm:top-9">
             <Settings onClick={showModal} />
           </div>
           <div className="w-full">
@@ -169,14 +173,16 @@ const Timer = () => {
             Longue pause
           </button>
         </div>
-        <div className="time text-9xl font-bold text-white mb-6">
+
+        <div className="time mt-4 text-6xl sm:text-9xl font-bold text-white mb-6">
           {formatTime(currentTime)}
         </div>
+
         <div className="controls flex flex-col gap-2">
           <div className="flex flex-col justify-center gap-2">
             <div className="flex bg-slate-100 m-auto gap-2 rounded-xl">
               <button
-                className="w-[200px] py-4 px-8 shadow-2xl text-black text-2xl z-10"
+                className="w-40 sm:w-[200px] py-4 px-8 shadow-2xl text-black text-lg sm:text-2xl z-10"
                 onClick={handleStartPause}
               >
                 {isRunning && !isPaused ? "Pause" : "Start"}
@@ -185,7 +191,7 @@ const Timer = () => {
 
             <div className="m-auto">
               <button
-                className=" px-2 text-2xl text-white mb-2"
+                className="px-2 text-xl sm:text-3xl text-white mb-2"
                 onClick={handleReset}
               >
                 ♻
