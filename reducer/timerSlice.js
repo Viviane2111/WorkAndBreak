@@ -120,23 +120,14 @@ const timerSlice = createSlice({
         state.cyclesUntilLongBreak
       );
     },
-    toggleAutoStartPomodoro: (state) => {
-      state.autoStartPomodoro = !state.autoStartPomodoro;
+    // pour garder l'état des checkbox
+    toggleAutoStartPomodoro: (state, action) => {
+      state.autoStartPomodoro = action.payload;
       console.log("Toggled autoStartPomodoro to:", state.autoStartPomodoro);
     },
-    toggleAutoStartBreaks: (state) => {
-      state.autoStartBreaks = !state.autoStartBreaks;
-      console.log("Toggled autoStartBreaks to:", state.autoStartBreaks);
-    },
-
-    // pour garder l'état des checkbox
-    setAutoStartPomodoro: (state, action) => {
-      state.autoStartPomodoro = action.payload;
-      console.log("Set autoStartPomodoro to:", state.autoStartPomodoro);
-    },
-    setAutoStartBreaks: (state, action) => {
+    toggleAutoStartBreaks: (state, action) => {
       state.autoStartBreaks = action.payload;
-      console.log("Set autoStartBreaks to:", state.autoStartBreaks);
+      console.log("Toggled autoStartBreaks to:", state.autoStartBreaks);
     },
   },
 });
@@ -154,8 +145,6 @@ export const {
   updateCyclesUntilLongBreak,
   toggleAutoStartPomodoro,
   toggleAutoStartBreaks,
-  setAutoStartPomodoro,
-  setAutoStartBreaks,
 } = timerSlice.actions;
 
 export default timerSlice.reducer;

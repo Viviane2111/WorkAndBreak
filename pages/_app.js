@@ -8,12 +8,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Head>
-        <link
-          rel="icon"
-          href="./tomat.png"
-          
-          type="image/png"
-        />
+        <link rel="icon" href="./tomat.png" type="image/png" />
         <title>Pomodoro</title>
       </Head>
       <Component {...pageProps} />
