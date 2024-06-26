@@ -1,6 +1,6 @@
 // utils/timerUtils.js
 
-const changeModeSound = "/sound/coucou.mp3"; //! ajouter 3
+const changeModeSound = "/sound/coucou3.mp3"; 
 
 // fonction pour jouer des sons
 export const playSound = () => {
