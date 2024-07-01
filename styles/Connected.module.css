@@ -7,13 +7,14 @@
    background: url("../public/sablier.png") no-repeat;
    background-size: cover;
    background-position: center;
+   margin-top: 64px;
 }
 .wrapper {
    width: 420px;
    background: transparent;
    border: 2px solid rgba(255,255,255,0.2);
    backdrop-filter: blur(40px);
-   box-shadow: 0 0 10px rgba(255,255,255,0.3);
+   box-shadow: 0 0 10px rgba(0,0,0,0.6);
    color: #fff;
    border-radius: 10px;
    padding: 30px 40px;
@@ -86,11 +87,15 @@
    text-align: center;
    margin: 20px 0 15px;
 }
-.registerLink .p .a {
+.registerLink .p .span {
    color: #fff;
    text-decoration: none;
    font-weight: 600;
+   cursor: pointer;
+   transition: all 0.5s;
 }
-.registerLink .p .a:hover {
+.registerLink .p .span:hover {
    text-decoration: underline;
+   /* color: #000; */
+   transform: scale(1.1);
 }
