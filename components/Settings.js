@@ -107,7 +107,7 @@ const Settings = () => {
   return (
     <div className="bg-[#293546] min-h-[100vh]">
       <Navbar />
-      <div className="min-h-[100vh] mt-16">
+      <div className="min-h-[100vh] mt-16 bg-[#293546] text-white">
         <div className="text-4xl text-center mb-20">
           <h1 className="pt-8">Settings</h1>
         </div>

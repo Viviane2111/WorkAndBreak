@@ -8,7 +8,7 @@ const ToggleCheckButton = ({ id, label, isChecked, onChange }) => {
           <input
             id={id}
             type="checkbox"
-            className="sr-only"
+            className="sr-only input"
             checked={isChecked}
             onChange={onChange}
           />

@@ -12,8 +12,8 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #151515;
-  color: antiquewhite;
+  /* background-color: #151515; */
+  /* color: antiquewhite; */
 }
 
 /** Couleurs en fonction du mode */
@@ -75,7 +75,7 @@ body {
 }
 
 /* CHECKBOX COMME BOUTON TOGGLE */
-input:checked ~ .dot {
+.input:checked ~ .dot {
   transform: translateX(100%);
   background-color: #009b22;
 }

@@ -44,7 +44,7 @@ const Navbar = () => {
             <span>Paramètres</span>
           </Link>
           <Link
-            href="/connexion"
+            href="/connected"
             className="flex items-center gap-1 mt-4 md:mt-0"
           >
             <CircleUserRound />
