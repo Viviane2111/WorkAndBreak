@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full h-16 flex justify-between items-center border-b-[1px] border-slate-50 bg-slate-800 text-slate-50 top-0 fixed px-4 md:px-8 z-50">
+    <div className="w-full h-16 flex justify-between items-center border-b-[1px] border-slate-50 bg-[#364d52] text-slate-50 top-0 fixed px-4 md:px-8 z-50">
       <Link href="/" className="flex items-center gap-1">
         <Hourglass color="#ff0000" size={16} />
         <span className="text-lg font-bold">POMODORO</span>
@@ -27,7 +27,7 @@ const Navbar = () => {
         </button>
       </div>
       <div
-        className={`absolute top-16 left-0 w-full bg-slate-800 md:static md:w-auto md:flex ${
+        className={`absolute top-16 left-0 w-full bg-[#364d52] md:static md:w-auto md:flex ${
           isOpen ? "block" : "hidden"
         } md:block`}
       >

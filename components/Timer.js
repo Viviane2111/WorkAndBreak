@@ -8,7 +8,7 @@ import {
   tick,
   switchMode,
   togglePause,
-} from "../reducer/timerSlice";
+} from "../reducers/timerSlice";
 import {
   playSound,
   formatTime,
@@ -105,19 +105,19 @@ const Timer = () => {
 
   return (
     <div
-      className={`timer max-w-4xl w-full mx-auto flex flex-col items-center gap-5 border ${getBackgroundClass(
+      className={`timer max-w-4xl w-full mx-auto flex flex-col items-center gap-5  ${getBackgroundClass(
         mode
       )}`}
     >
       <div>
-        <h1 className="text-lg sm:text-xl mt-10 pt-8 text-center">
+        <h1 className="text-lg sm:text-xl mt-10 pt-8 text-center text-white">
           {mode === "work"
             ? "Il est temps de se concentrer !"
             : mode === "break"
             ? "Il est temps pour une pause !"
             : "Il est temps de s'étirer et se détendre !"}
         </h1>
-        <p className="text-center mt-2 text-lg">
+        <p className="text-center mt-2 text-lg test-white">
           {Math.floor(currentTime / 60)} minutes
         </p>
       </div>
@@ -130,13 +130,13 @@ const Timer = () => {
       </div>
       {/* Container des boutons des timers */}
       <div
-        className={`h-full sm:w-[80%] my-8 flex flex-col items-center relative ${getSectionClass(
+        className={`h-full sm:w-[80%] my-8 flex flex-col items-center rounded-3xl relative ${getSectionClass(
           mode
         )}`}
       >
         {/* l'icone pour ouvrir la modale */}
         <div className="w-full">
-          <div className=" absolute left-1 top-1 sm:left-6 sm:top-9">
+          <div className=" absolute left-1 top-1 sm:left-6 sm:top-9 text-white">
             <Settings onClick={showModal} />
           </div>
           <div className="w-full">
@@ -182,7 +182,7 @@ const Timer = () => {
           <div className="flex flex-col justify-center gap-2">
             <div className="flex bg-slate-100 m-auto gap-2 rounded-xl">
               <button
-                className="w-40 sm:w-[200px] py-4 px-8 shadow-2xl text-black text-lg sm:text-2xl z-10"
+                className="w-40 sm:w-[200px] py-4 px-8 shadow-2xl shadow-[#0000007c] text-black text-lg sm:text-2xl z-10"
                 onClick={handleStartPause}
               >
                 {isRunning && !isPaused ? "Pause" : "Start"}
@@ -191,17 +191,17 @@ const Timer = () => {
 
             <div className="m-auto">
               <button
-                className="px-2 text-xl sm:text-3xl text-white mb-2"
+                className="px-2 text-xl sm:text-2xl text-gray-50 mb-2 mt-3"
                 onClick={handleReset}
               >
                 ♻
               </button>
             </div>
+            <div className="cycles text-lg font-medium text-white my-4 text-center">
+              Cycles : {cycleCount}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="cycles text-lg font-medium text-white my-4">
-        Cycles : {cycleCount}
       </div>
     </div>
   );

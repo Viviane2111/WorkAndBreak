@@ -17,7 +17,7 @@ export const formatTime = (time) => {
 
 // ajout du css sur les boutons concernés, en fonction du mode
 export const getButtonClass = (mode, buttonMode) => {
-  let baseClass = `cursor-pointer w-28 py-1 px-1 rounded-md `;
+  let baseClass = `cursor-pointer w-28 py-1 px-1 rounded-md text-white `;
   if (mode === buttonMode) {
     if (mode === "work") {
       baseClass += "button-work";

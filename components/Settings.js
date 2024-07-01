@@ -2,7 +2,14 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./Navbar";
-import { updateWorkTime, updateBreakTime, updateLongBreakTime, updateCyclesUntilLongBreak, toggleAutoStartPomodoro, toggleAutoStartBreaks, } from "../reducer/timerSlice";
+import {
+  updateWorkTime,
+  updateBreakTime,
+  updateLongBreakTime,
+  updateCyclesUntilLongBreak,
+  toggleAutoStartPomodoro,
+  toggleAutoStartBreaks,
+} from "../reducers/timerSlice";
 import ToggleCheckButton from "./ToggleCheckButton";
 import { saveSettingsToLocalStorage, loadSettingsFromLocalStorage, loadSettingsAndDispatch, } from "../utils/storageUtils";
 
@@ -188,8 +195,8 @@ const Settings = () => {
               </div>
             </div>
             {/* lancement automatique des pauses */}
-            <div className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
-              <label className="w-[375px] text-xl">
+            <div className="flex flex-col md:flex-row items-center mx-2 mb-7 w-full">
+              <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
                 Lancement automatique des pauses :
               </label>
               <div className="flex flex-col items-center">

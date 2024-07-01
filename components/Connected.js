@@ -1,26 +1,24 @@
-// components/Connected.js
 import styles from "../styles/Connected.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserRound, Lock, MailIcon } from "lucide-react";
+import { login, logout } from "../reducers/user";
+
 function Connected() {
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.user.value);
-
-  // [signupUsername, signupEmail, signupPassword,] >>> inscription
+  // inscription
   const [signupUsername, setSignupUsername] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
-
-  // [loginEmail, loginPassword,] >>> connexion
+  // connexion
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
+  // formulaires
   const [isRegistering, setIsRegistering] = useState(false);
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
   };
-
   //* INSCRIPTION
   const handleRegister = (event) => {
     event.preventDefault();
@@ -49,8 +47,7 @@ function Connected() {
         }
       });
   };
-
-  // *CONNECTION
+  // *CONNEXION
   const handleConnection = (event) => {
     event.preventDefault();
     fetch("http://localhost:3000/users/login", {
@@ -70,8 +67,7 @@ function Connected() {
         }
       });
   };
-
-  //*  DECONNEXION
+  //*  DÉCONNEXION
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -82,12 +78,12 @@ function Connected() {
 
       <div className={styles.inputBox}>
         <input
-          className={styles.input}
           type="text"
           placeholder="Ton nom"
           required
-          value={signupUsername}
           onChange={(e) => setSignupUsername(e.target.value)}
+          value={signupUsername}
+          className={styles.input}
         />
         <span className={styles.icon}>
           <UserRound size={18} stroke-width="2.5px" color="#fff" />
@@ -97,7 +93,7 @@ function Connected() {
       <div className={styles.inputBox}>
         <input
           className={styles.input}
-          type="text"
+          type="email"
           placeholder="Ton email"
           required
           value={signupEmail}
@@ -128,10 +124,10 @@ function Connected() {
         </button>
       </div>
 
-      <div class={styles.registerLink}>
+      <div className={styles.registerLink}>
         <p className={styles.p}>
-          Vous avez pas un compte ?{" "}
-          <span className={styles.a} onClick={toggleForm}>
+          Vous avez déjà un compte ?{" "}
+          <span className={styles.span} onClick={toggleForm}>
             Se connecter
           </span>
         </p>
@@ -142,10 +138,11 @@ function Connected() {
   const LoginForm = () => (
     <form onSubmit={handleConnection} className={styles.form}>
       <h1 className={styles.h1}>Connexion</h1>
+
       <div className={styles.inputBox}>
         <input
           className={styles.input}
-          type="text"
+          type="email"
           placeholder="Ton email"
           required
           value={loginEmail}
@@ -181,22 +178,18 @@ function Connected() {
       </div>
 
       <div className="button">
-        <button
-          type="submit"
-          className={styles.button}
-        >
+        <button type="submit" className={styles.button}>
           Se connecter
         </button>
       </div>
 
-      <div class={styles.registerLink}>
+      <div className={styles.registerLink}>
         <p className={styles.p}>
           Vous n'avez pas de compte ?{" "}
           <span className={styles.span} onClick={toggleForm}>
             S'enregistrer
           </span>
         </p>
-        
       </div>
     </form>
   );

@@ -1,6 +1,6 @@
 // pages/_app.js
 import { Provider } from "react-redux";
-import store from "../reducer/store";
+import store from "../reducers/store";
 import Head from "next/head";
 import "../styles/globals.css";
 

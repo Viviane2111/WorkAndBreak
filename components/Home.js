@@ -5,9 +5,12 @@ import Navbar from "./Navbar";
 const Home = () => {
 
   return (
-    <div className="min-h-screen w-full bg-[#151515]">
+    <div>
       <Navbar />
-      <Timer />
+      <div className="home min-h-screen w-full bg-[#151515]">
+        <div className="blurMask"></div>
+        <Timer />
+      </div>
     </div>
   );
 };

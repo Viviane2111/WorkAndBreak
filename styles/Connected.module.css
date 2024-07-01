@@ -96,6 +96,5 @@
 }
 .registerLink .p .span:hover {
    text-decoration: underline;
-   /* color: #000; */
    transform: scale(1.1);
 }

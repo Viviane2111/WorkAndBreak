@@ -1,5 +1,13 @@
 // utils/storageUtils.js
-import { updateWorkTime, updateBreakTime, updateLongBreakTime, updateCyclesUntilLongBreak, toggleAutoStartPomodoro, toggleAutoStartBreaks, switchMode, } from "../reducer/timerSlice";
+import {
+  updateWorkTime,
+  updateBreakTime,
+  updateLongBreakTime,
+  updateCyclesUntilLongBreak,
+  toggleAutoStartPomodoro,
+  toggleAutoStartBreaks,
+  switchMode,
+} from "../reducers/timerSlice";
 
 // récupérer les données
 export const loadSettingsFromLocalStorage = () => {

@@ -9,7 +9,7 @@ import {
   updateCyclesUntilLongBreak,
   toggleAutoStartPomodoro,
   toggleAutoStartBreaks,
-} from "../reducer/timerSlice";
+} from "../reducers/timerSlice";
 import { saveSettingsToLocalStorage } from "../utils/storageUtils";
 import { Timer } from "lucide-react";
 
@@ -53,19 +53,19 @@ const SettingModal = ({onClose}) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
-      <div className="bg-white rounded-md p-6 w-full max-w-md mx-auto">
+      <div className="bg-[#02b5ef] rounded-md p-6 w-full max-w-md mx-auto">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center text-gray-700">
-            <Timer className="mr-2" />
+          <div className="flex items-center text-gray-50">
+            <Timer className="mr-2 text-red-500" />
             <span className="text-xl font-bold">Settings</span>
           </div>
-          <button onClick={onClose} className="text-gray-700">
+          <button onClick={onClose} className="text-gray-50 text-2xl">
             &times;
           </button>
         </div>
         <div className="space-y-4">
           <div className="flex flex-col">
-            <label className="mb-1 text-gray-600">Action (minutes)</label>
+            <label className="mb-1 text-gray-50">Action (minutes)</label>
             <input
               type="number"
               value={work}
@@ -74,7 +74,7 @@ const SettingModal = ({onClose}) => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="mb-1 text-gray-600">Courte pause (minutes)</label>
+            <label className="mb-1 text-gray-50">Courte pause (minutes)</label>
             <input
               type="number"
               value={shortBreak}
@@ -83,7 +83,7 @@ const SettingModal = ({onClose}) => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="mb-1 text-gray-600">Longue pause (minutes)</label>
+            <label className="mb-1 text-gray-50">Longue pause (minutes)</label>
             <input
               type="number"
               value={longBreak}
@@ -92,7 +92,7 @@ const SettingModal = ({onClose}) => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="mb-1 text-gray-600">Nombre de cycles</label>
+            <label className="mb-1 text-gray-50">Nombre de cycles</label>
             <input
               type="number"
               value={cycles}
@@ -101,7 +101,7 @@ const SettingModal = ({onClose}) => {
             />
           </div>
           <div className="flex pt-2">
-            <label className="w-[375px] text-md text-gray-600">
+            <label className="w-[375px] text-md text-gray-50">
               Lancement automatique de l'action :
             </label>
             <div className="flex flex-col items-center justify-center">
@@ -114,7 +114,7 @@ const SettingModal = ({onClose}) => {
             </div>
           </div>
           <div className="flex">
-            <label className="w-[375px] text-md text-gray-600">
+            <label className="w-[375px] text-md text-gray-50">
               Lancement automatique des pauses :
             </label>
             <div className="flex flex-col items-center justify-center">
