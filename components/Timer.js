@@ -117,7 +117,7 @@ const Timer = () => {
             ? "Il est temps pour une pause !"
             : "Il est temps de s'étirer et se détendre !"}
         </h1>
-        <p className="text-center mt-2 text-lg test-white">
+        <p className="text-center mt-2 text-lg text-white">
           {Math.floor(currentTime / 60)} minutes
         </p>
       </div>
