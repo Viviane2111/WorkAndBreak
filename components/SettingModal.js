@@ -41,6 +41,7 @@ const SettingModal = ({onClose}) => {
          workTime: work * 60,
          breakTime: shortBreak * 60,
          longBreakTime: longBreak * 60,
+         cyclesUntilLongBreak: cycles,
       };
       saveSettingsToLocalStorage(settings);
       dispatch(updateWorkTime(work));
@@ -52,12 +53,12 @@ const SettingModal = ({onClose}) => {
 
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
-      <div className="bg-[#02b5ef] rounded-md p-6 w-full max-w-md mx-auto">
-        <div className="flex items-center justify-between mb-4">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 mt-16">
+      <div className=" bg-gray-800 shadow-2xl rounded-md p-6 w-full max-w-md mx-auto">
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center text-gray-50">
             <Timer className="mr-2 text-red-500" />
-            <span className="text-xl font-bold">Settings</span>
+            <span className="text-xl font-bold">Paramètres</span>
           </div>
           <button onClick={onClose} className="text-gray-50 text-2xl">
             &times;

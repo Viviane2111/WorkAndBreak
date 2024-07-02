@@ -1,8 +1,8 @@
 import styles from "../styles/Connected.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UserRound, Lock, MailIcon } from "lucide-react";
 import { login, logout } from "../reducers/user";
+import { UserRound, Lock, MailIcon } from "lucide-react";
 
 function Connected() {
   const dispatch = useDispatch();

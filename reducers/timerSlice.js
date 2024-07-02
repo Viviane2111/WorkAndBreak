@@ -53,7 +53,7 @@ const timerSlice = createSlice({
       state.isPaused = false;
       state.currentTime = state.workTime;
       state.mode = "work";
-      state.cycleCount = 0;
+      state.cycleCount = 4;
       clearLocalStorage();
     },
     // à chaque seconde

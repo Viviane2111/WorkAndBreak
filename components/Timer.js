@@ -1,13 +1,14 @@
 // components/Timer.js
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Settings, XIcon } from "lucide-react";
+import { Settings, User2 } from "lucide-react";
 import {
   startTimer,
   resetTimer,
   tick,
   switchMode,
   togglePause,
+  
 } from "../reducers/timerSlice";
 import {
   playSound,
@@ -18,6 +19,7 @@ import {
 } from "../utils/timerUtils";
 import { loadSettingsAndDispatch } from "../utils/storageUtils";
 import SettingModal from "./SettingModal";
+import ConnectModal from "./ConnectModal";
 
 const Timer = () => {
   const dispatch = useDispatch();
@@ -36,6 +38,10 @@ const Timer = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(!isModalVisible);
+  };
+  const [isConnectVisible, setIsConnectVisible] = useState(false);
+  const showConnect = () => {
+    setIsConnectVisible(!isConnectVisible);
   };
 
   useEffect(() => {
@@ -136,7 +142,7 @@ const Timer = () => {
       >
         {/* l'icone pour ouvrir la modale */}
         <div className="w-full">
-          <div className=" absolute left-1 top-1 sm:left-6 sm:top-9 text-white">
+          <div className=" absolute left-1 top-1 sm:left-6 sm:top-9 text-white cursor-pointer">
             <Settings onClick={showModal} />
           </div>
           <div className="w-full">
@@ -172,6 +178,14 @@ const Timer = () => {
           >
             Longue pause
           </button>
+        </div>
+        <div className="w-full">
+          <div className=" absolute ml-[90%] left-1 top-1 sm:left-6 sm:top-9 text-white cursor-pointer">
+            <User2 onClick={showConnect} />
+          </div>
+          <div className="w-full">
+            {isConnectVisible && <ConnectModal onClose={showConnect} />}
+          </div>
         </div>
 
         <div className="time mt-4 text-6xl sm:text-9xl font-bold text-white mb-6">

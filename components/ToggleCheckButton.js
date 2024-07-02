@@ -12,8 +12,8 @@ const ToggleCheckButton = ({ id, label, isChecked, onChange }) => {
             checked={isChecked}
             onChange={onChange}
           />
-          <div className="block bg-[#ffefd2] w-14 h-8 rounded-full"></div>
-          <div className="dot absolute left-1 top-1 bg-emerald-300 w-6 h-6 rounded-full transition"></div>
+          <div className="block bg-stone-600 w-14 h-8 rounded-full"></div>
+          <div className="dot absolute left-1 top-1 bg-emerald-600 w-6 h-6 rounded-full transition"></div>
         </div>
         <div className="ml-3 text-gray-600 font-medium">{label}</div>
       </label>

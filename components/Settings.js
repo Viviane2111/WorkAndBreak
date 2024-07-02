@@ -112,13 +112,13 @@ const Settings = () => {
   };
 
   return (
-    <div className="bg-[#293546] min-h-[100vh]">
+    <div className="min-h-[100vh]">
       <Navbar />
-      <div className="min-h-[100vh] mt-16 bg-[#293546] text-white">
+      <div className="settings min-h-[100vh] mt-16 text-[#ffdb0d] font-bold">
         <div className="text-4xl text-center mb-20">
           <h1 className="pt-8">Settings</h1>
         </div>
-        <div className="max-w-full w-[90%] md:w-[910px] m-auto flex flex-col items-center gap-8">
+        <div className="max-w-full w-[90%] md:w-[880px] m-auto flex flex-col items-center gap-8 rounded-2xl backdrop-blur-2xl shadow-2xl p-5">
           {/* travail */}
           <div className="flex flex-col md:flex-row items-center mx-2 w-full">
             <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
@@ -131,7 +131,7 @@ const Settings = () => {
                 onChange={handleUpdateWorkTime}
                 value={work}
               />
-              <span className="text-sm text-[#a1a1a1]">en minutes</span>
+              <span className="text-sm text-[#202020]">en minutes</span>
             </div>
           </div>
           {/* pause 1 */}
@@ -146,7 +146,7 @@ const Settings = () => {
                 onChange={handleUpdateBreakTime}
                 value={shortbreak}
               />
-              <span className="text-sm text-[#a1a1a1]">en minutes</span>
+              <span className="text-sm text-[#202020]">en minutes</span>
             </div>
           </div>
           {/* pause 2 */}
@@ -161,7 +161,7 @@ const Settings = () => {
                 onChange={handleUpdateLongBreakTime}
                 value={longbreak}
               />
-              <span className="text-sm text-[#a1a1a1]">en minutes</span>
+              <span className="text-sm text-[#202020]">en minutes</span>
             </div>
           </div>
           {/* nombre de cycle */}
@@ -176,14 +176,14 @@ const Settings = () => {
                 onChange={handleUpdateCyclesUntilLongBreak}
                 value={delay}
               />
-              <span className="text-sm text-[#a1a1a1]">en cycle travaillé</span>
+              <span className="text-sm text-[#202020]">en cycle travaillé</span>
             </div>
           </div>
           <div className="mt-5">
             {/* lancement automatique du temps travaillé */}
             <div className="flex flex-col md:flex-row items-center mx-2 mb-7 w-full">
-              <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
-                Lancement automatique du pomodoro :
+              <label className="w-full md:w-[375px] text-xl text-left md:text-left mb-2 md:mb-0">
+                Lancement automatique du temps travaillé :
               </label>
               <div className="flex flex-col items-center">
                 <ToggleCheckButton
@@ -197,7 +197,7 @@ const Settings = () => {
             {/* lancement automatique des pauses */}
             <div className="flex flex-col md:flex-row items-center mx-2 mb-7 w-full">
               <label className="w-full md:w-[375px] text-xl text-center md:text-left mb-2 md:mb-0">
-                Lancement automatique des pauses :
+                Lancement automatique du temps de pause :
               </label>
               <div className="flex flex-col items-center">
                 <ToggleCheckButton
